@@ -24,62 +24,62 @@ import {
 } from "lucide-react";
 
 const WHATSAPP_URL =
-  "https://wa.me/556184843238?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Multicorretora%20e%20quero%20receber%20uma%20cota%C3%A7%C3%A3o.";
+  "https://wa.me/556184843238?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Multicorretora%20e%20quero%20comparar%20planos%20para%20encontrar%20a%20melhor%20op%C3%A7%C3%A3o%20para%20mim.";
 
 const services = [
   {
     icon: Users,
     title: "Plano individual e familiar",
-    text: "Proteção sob medida para você e para quem faz parte da sua vida.",
-    tag: "Cuidado completo",
+    text: "Compare redes, coberturas e valores para proteger quem você ama sem escolher no escuro.",
+    tag: "Para quem você ama",
   },
   {
     icon: BriefcaseBusiness,
     title: "Plano empresarial",
-    text: "Benefícios de saúde para valorizar sua equipe e fortalecer o negócio.",
-    tag: "A partir de 2 vidas*",
+    text: "Encontre um benefício competitivo para cuidar da equipe e valorizar sua empresa.",
+    tag: "Soluções empresariais",
   },
   {
     icon: Stethoscope,
     title: "Plano por adesão",
-    text: "Alternativas para profissionais vinculados a categorias e entidades.",
-    tag: "Mais possibilidades",
+    text: "Descubra alternativas disponíveis para sua categoria profissional e amplie suas possibilidades.",
+    tag: "Compare possibilidades",
   },
   {
     icon: ShieldCheck,
     title: "Seguro de vida",
-    text: "Tranquilidade financeira para você e sua família em cada fase.",
-    tag: "Proteção financeira",
+    text: "Crie uma proteção financeira para quem depende de você e viva cada fase com mais tranquilidade.",
+    tag: "Cuide do futuro",
   },
   {
     icon: Hospital,
     title: "Seguro saúde",
-    text: "Liberdade de escolha e suporte para cuidar da saúde com confiança.",
-    tag: "Flexibilidade",
+    text: "Tenha mais liberdade para cuidar da saúde com uma solução alinhada às suas prioridades.",
+    tag: "Mais liberdade",
   },
   {
     icon: Building2,
     title: "Benefícios corporativos",
-    text: "Consultoria para encontrar soluções alinhadas à realidade da empresa.",
-    tag: "Atendimento consultivo",
+    text: "Receba uma análise consultiva para contratar benefícios que façam sentido para o negócio.",
+    tag: "Decida com clareza",
   },
 ];
 
 const steps = [
   {
     number: "01",
-    title: "Conte o que você precisa",
-    text: "Entendemos seu perfil, prioridades e faixa de investimento.",
+    title: "Diga o que você procura",
+    text: "Uma conversa rápida nos ajuda a entender seu perfil, prioridades e investimento.",
   },
   {
     number: "02",
-    title: "Compare as melhores opções",
-    text: "Você recebe alternativas claras para escolher com segurança.",
+    title: "Receba opções para comparar",
+    text: "Apresentamos alternativas de forma clara para facilitar a sua decisão.",
   },
   {
     number: "03",
-    title: "Contrate com suporte",
-    text: "Acompanhamos o processo e seguimos ao seu lado após a contratação.",
+    title: "Escolha e contrate com suporte",
+    text: "Você decide com segurança e conta com acompanhamento durante a contratação.",
   },
 ];
 
@@ -184,7 +184,7 @@ export default function Home() {
             rel="noreferrer"
           >
             <MessageCircle size={18} aria-hidden="true" />
-            Falar com um consultor
+            Comparar planos agora
           </a>
         </div>
       </header>
@@ -197,14 +197,15 @@ export default function Home() {
           <div className="hero-copy">
             <div className="eyebrow">
               <Sparkles size={16} aria-hidden="true" />
-              Proteção inteligente para cada fase
+              Sua cotação começa aqui
             </div>
             <h1>
-              Seu futuro merece <span>mais cuidado.</span>
+              Encontre o plano certo <span>sem escolher no escuro.</span>
             </h1>
             <p className="hero-lead">
-              Encontre planos de saúde e seguros que combinam com você, sua
-              família ou sua empresa — com orientação clara do início ao fim.
+              Compare opções para você, sua família ou sua empresa com uma
+              consultoria que explica cada detalhe e ajuda a evitar uma escolha
+              que não combina com o que você precisa.
             </p>
             <div className="hero-actions">
               <a
@@ -213,22 +214,22 @@ export default function Home() {
                 target="_blank"
                 rel="noreferrer"
               >
-                Quero minha cotação
+                Receber opções no WhatsApp
                 <ArrowRight size={19} aria-hidden="true" />
               </a>
               <a className="text-link" href="#solucoes">
-                Conheça as soluções
+                Ver opções de proteção
                 <ChevronRight size={18} aria-hidden="true" />
               </a>
             </div>
             <div className="trust-row" aria-label="Diferenciais">
               <span>
                 <CircleCheckBig size={17} aria-hidden="true" />
-                Atendimento humano
+                Cotação sem compromisso
               </span>
               <span>
                 <CircleCheckBig size={17} aria-hidden="true" />
-                Comparação transparente
+                Orientação de verdade
               </span>
             </div>
           </div>
@@ -256,7 +257,7 @@ export default function Home() {
               </span>
               <span>
                 <small>Para você</small>
-                Cuidado personalizado
+                Opções para o seu perfil
               </span>
             </div>
             <div className="floating-card floating-bottom">
@@ -265,14 +266,14 @@ export default function Home() {
               </span>
               <span>
                 <small>Proteção</small>
-                Escolhas mais seguras
+                Decida com confiança
               </span>
             </div>
           </div>
         </div>
         <a className="scroll-cue" href="#solucoes" aria-label="Ir para as soluções">
           <span />
-          Descubra
+        Compare
         </a>
       </section>
 
@@ -281,22 +282,22 @@ export default function Home() {
           <div>
             <BadgeCheck aria-hidden="true" />
             <span>
-              <strong>Consultoria próxima</strong>
-              Orientação para decidir bem
+              <strong>Escolha sem dúvida</strong>
+              Entenda antes de contratar
             </span>
           </div>
           <div>
             <Clock3 aria-hidden="true" />
             <span>
-              <strong>Resposta ágil</strong>
-              Cotação direto pelo WhatsApp
+              <strong>Comece agora</strong>
+              Cotação pelo WhatsApp
             </span>
           </div>
           <div>
             <WalletCards aria-hidden="true" />
             <span>
-              <strong>Escolha consciente</strong>
-              Opções alinhadas ao seu perfil
+              <strong>Evite pagar pelo que não usa</strong>
+              Compare o que realmente importa
             </span>
           </div>
         </div>
@@ -307,11 +308,11 @@ export default function Home() {
           <div className="section-heading" data-reveal>
             <div>
               <span className="section-kicker">Nossas soluções</span>
-              <h2>Proteção que acompanha a sua vida.</h2>
+              <h2>Compare hoje. Escolha com mais confiança.</h2>
             </div>
             <p>
-              Cuidamos da pesquisa e da comparação para você escolher com mais
-              clareza, tranquilidade e confiança.
+              Você conta o que precisa. Nós ajudamos a filtrar as opções e
+              mostramos o que vale a pena considerar antes de contratar.
             </p>
           </div>
           <div className="service-grid">
@@ -331,7 +332,7 @@ export default function Home() {
                   <h3>{service.title}</h3>
                   <p>{service.text}</p>
                   <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">
-                    Solicitar cotação
+                    Ver opções para mim
                     <ArrowRight size={17} aria-hidden="true" />
                   </a>
                 </article>
@@ -360,8 +361,8 @@ export default function Home() {
               <span className="section-kicker light">Nossa essência</span>
               <h2>Proteger hoje.<br />Cuidar do amanhã.</h2>
               <p>
-                A Multicorretora aproxima você das soluções certas com escuta,
-                clareza e acompanhamento em cada decisão.
+                A Multicorretora simplifica a comparação para você contratar
+                sabendo o que está levando.
               </p>
               <div className="about-signature">
                 <div>
@@ -373,16 +374,17 @@ export default function Home() {
           </div>
           <div className="about-copy" data-reveal>
             <span className="section-kicker">Por que a Multicorretora?</span>
-            <h2>Você não precisa escolher sozinho.</h2>
+            <h2>Uma boa escolha começa com a orientação certa.</h2>
             <p>
-              Entre tantas redes, coberturas e condições, uma boa orientação
-              faz toda a diferença. Traduzimos as opções para uma conversa
-              simples e ajudamos você a avaliar o que realmente importa.
+              Redes, coberturas, carências e condições podem transformar uma
+              escolha simples em uma decisão difícil. Nós traduzimos os
+              detalhes, comparamos as alternativas e ajudamos você a avançar
+              com segurança.
             </p>
             <ul>
               <li>
                 <Check aria-hidden="true" />
-                Atendimento próximo, sem complicação
+                Entenda as diferenças antes de contratar
               </li>
               <li>
                 <Check aria-hidden="true" />
@@ -390,11 +392,11 @@ export default function Home() {
               </li>
               <li>
                 <Check aria-hidden="true" />
-                Suporte durante todo o processo de contratação
+                Receba opções alinhadas às suas prioridades
               </li>
               <li>
                 <Check aria-hidden="true" />
-                Comunicação clara para uma escolha consciente
+                Tenha suporte para concluir sua contratação
               </li>
             </ul>
             <a
@@ -403,7 +405,7 @@ export default function Home() {
               target="_blank"
               rel="noreferrer"
             >
-              Conversar com a equipe
+              Quero ajuda para escolher
               <MessageCircle size={19} aria-hidden="true" />
             </a>
           </div>
@@ -414,8 +416,8 @@ export default function Home() {
         <div className="container">
           <div className="center-heading" data-reveal>
             <span className="section-kicker">Simples do começo ao fim</span>
-            <h2>Seu plano ideal em três passos.</h2>
-            <p>Sem formulários longos. Comece com uma conversa.</p>
+            <h2>Da dúvida à cotação em três passos.</h2>
+            <p>Sem formulários longos. Comece agora com uma conversa.</p>
           </div>
           <div className="steps-grid">
             {steps.map((step, index) => (
@@ -443,13 +445,13 @@ export default function Home() {
         <div className="container faq-layout">
           <div className="faq-intro" data-reveal>
             <span className="section-kicker">Perguntas frequentes</span>
-            <h2>Informação clara também é cuidado.</h2>
+            <h2>Tire a dúvida que está adiando sua escolha.</h2>
             <p>
-              Ainda ficou com alguma dúvida? Nossa equipe está pronta para
-              conversar com você.
+              Se uma rede, cobertura ou condição ainda não ficou clara, fale
+              com a nossa equipe antes de decidir.
             </p>
             <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">
-              Tirar uma dúvida no WhatsApp
+              Falar com um especialista agora
               <ArrowRight size={18} aria-hidden="true" />
             </a>
           </div>
@@ -471,11 +473,11 @@ export default function Home() {
         <div className="container cta-card" data-reveal>
           <div className="cta-orb" aria-hidden="true" />
           <div>
-            <span className="section-kicker light">Seu próximo passo</span>
-            <h2>Vamos encontrar a proteção certa para você?</h2>
+            <span className="section-kicker light">Comece sem compromisso</span>
+            <h2>Sua melhor opção pode estar a uma conversa de distância.</h2>
             <p>
-              Fale agora com a Multicorretora e receba uma orientação
-              personalizada.
+              Conte o que você precisa e receba opções para comparar com calma,
+              clareza e suporte.
             </p>
           </div>
           <a
@@ -485,7 +487,7 @@ export default function Home() {
             rel="noreferrer"
           >
             <MessageCircle size={21} aria-hidden="true" />
-            Pedir cotação pelo WhatsApp
+            Quero comparar planos agora
           </a>
         </div>
       </section>
@@ -499,7 +501,7 @@ export default function Home() {
               width={420}
               height={224}
             />
-            <p>Planos de saúde e seguros com orientação e cuidado.</p>
+            <p>Compare planos e seguros com clareza antes de contratar.</p>
           </div>
           <div className="footer-nav">
             <strong>Navegação</strong>
@@ -534,7 +536,7 @@ export default function Home() {
         aria-label="Falar com a Multicorretora pelo WhatsApp"
       >
         <MessageCircle aria-hidden="true" />
-        <span>Fale conosco</span>
+        <span>Cotar agora</span>
       </a>
     </main>
   );

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     template: "%s | Multicorretora",
   },
   description:
-    "Encontre planos de saúde e seguros para você, sua família ou sua empresa. Receba orientação personalizada da Multicorretora pelo WhatsApp.",
+    "Compare planos de saúde e seguros para você, sua família ou sua empresa. Receba opções e orientação personalizada da Multicorretora pelo WhatsApp.",
   keywords: [
     "plano de saúde Brasília",
     "corretora de planos de saúde DF",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Multicorretora | Planos de Saúde e Seguros",
     description:
-      "Proteção inteligente para você, sua família e sua empresa. Solicite uma cotação personalizada.",
+      "Compare planos de saúde e seguros com orientação clara. Receba opções personalizadas pelo WhatsApp.",
     type: "website",
     locale: "pt_BR",
     siteName: "Multicorretora",
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Multicorretora | Planos de Saúde e Seguros",
     description:
-      "Planos de saúde e seguros com atendimento próximo e personalizado.",
+      "Compare opções e encontre um plano alinhado ao que você realmente precisa.",
     images: ["/og.png"],
   },
   robots: {
