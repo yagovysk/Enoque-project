@@ -526,6 +526,16 @@ export default function Home() {
             reservados.
           </span>
           <span>Planos de Saúde e Seguros</span>
+          <span className="footer-credit">
+            Desenvolvido por{" "}
+            <a
+              href="https://www.togyrogroupvictory.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              TogyroGroup
+            </a>
+          </span>
         </div>
       </footer>
 

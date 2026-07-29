@@ -1165,6 +1165,25 @@ footer {
   font-size: 0.68rem;
 }
 
+.footer-credit a {
+  color: var(--green-400);
+  font-weight: 700;
+  transition:
+    color 180ms ease,
+    text-shadow 180ms ease;
+}
+
+.footer-credit a:hover {
+  color: white;
+  text-shadow: 0 0 14px rgba(32, 211, 142, 0.7);
+}
+
+.footer-credit a:focus-visible {
+  border-radius: 3px;
+  outline: 2px solid var(--green-400);
+  outline-offset: 4px;
+}
+
 .whatsapp-float {
   position: fixed;
   z-index: 40;
