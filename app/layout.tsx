@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    "https://multicorretora-saude-seguros.togyro-yago-1881.chatgpt.site",
+  ),
   title: {
     default: "Multicorretora | Planos de Saúde e Seguros em Brasília",
     template: "%s | Multicorretora",
@@ -37,12 +40,21 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pt_BR",
     siteName: "Multicorretora",
+    images: [
+      {
+        url: "/og.png",
+        width: 1734,
+        height: 907,
+        alt: "Multicorretora — cuidado para cada fase da vida",
+      },
+    ],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Multicorretora | Planos de Saúde e Seguros",
     description:
       "Planos de saúde e seguros com atendimento próximo e personalizado.",
+    images: ["/og.png"],
   },
   robots: {
     index: true,
@@ -56,9 +68,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/logo-multicorretora.jpeg",
-    shortcut: "/logo-multicorretora.jpeg",
-    apple: "/logo-multicorretora.jpeg",
+    icon: "/logo-multicorretora-menu.jpeg",
+    shortcut: "/logo-multicorretora-menu.jpeg",
+    apple: "/logo-multicorretora-menu.jpeg",
   },
 };
 

@@ -134,7 +134,7 @@ export default function Home() {
     telephone: "+55 61 8484-3238",
     taxID: "19.607.678/0001-65",
     areaServed: "Distrito Federal",
-    image: "/logo-multicorretora.jpeg",
+    image: "/logo-multicorretora-menu.jpeg",
     contactPoint: {
       "@type": "ContactPoint",
       telephone: "+55 61 8484-3238",
@@ -164,10 +164,10 @@ export default function Home() {
         <div className="container nav-wrap">
           <a className="brand" href="#inicio" aria-label="Multicorretora - início">
             <Image
-              src="/logo-multicorretora.jpeg"
+              src="/logo-multicorretora-menu.jpeg"
               alt="Multicorretora Planos de Saúde e Seguros"
-              width={300}
-              height={200}
+              width={420}
+              height={224}
               priority
             />
           </a>
@@ -235,20 +235,19 @@ export default function Home() {
 
           <div className="hero-visual" aria-label="Proteção para você, sua família e sua empresa">
             <div className="visual-glow" aria-hidden="true" />
-            <div className="logo-card">
-              <div className="logo-halo" aria-hidden="true" />
+            <div className="family-hero-card">
               <Image
-                src="/logo-multicorretora.jpeg"
-                alt=""
-                width={480}
-                height={320}
-                className="hero-logo"
+                src="/familia-hero.png"
+                alt="Família sorrindo reunida em casa"
+                width={1693}
+                height={929}
+                className="family-hero-image"
                 priority
               />
-              <div className="logo-card-footer">
-                <span>Planos de saúde</span>
-                <span className="dot" />
-                <span>Seguros</span>
+              <div className="family-photo-shade" aria-hidden="true" />
+              <div className="family-photo-badge">
+                <ShieldCheck size={18} aria-hidden="true" />
+                Proteção para toda a família
               </div>
             </div>
             <div className="floating-card floating-top">
@@ -350,6 +349,14 @@ export default function Home() {
         <div className="container about-layout">
           <div className="about-visual" data-reveal>
             <div className="about-card">
+              <Image
+                src="/familia-geracoes.png"
+                alt="Família de diferentes gerações caminhando junta em um parque"
+                fill
+                sizes="(max-width: 980px) 100vw, 46vw"
+                className="about-family-image"
+              />
+              <div className="about-image-overlay" aria-hidden="true" />
               <span className="section-kicker light">Nossa essência</span>
               <h2>Proteger hoje.<br />Cuidar do amanhã.</h2>
               <p>
@@ -487,10 +494,10 @@ export default function Home() {
         <div className="container footer-main">
           <div className="footer-brand">
             <Image
-              src="/logo-multicorretora.jpeg"
+              src="/logo-multicorretora-menu.jpeg"
               alt="Multicorretora"
-              width={270}
-              height={180}
+              width={420}
+              height={224}
             />
             <p>Planos de saúde e seguros com orientação e cuidado.</p>
           </div>
