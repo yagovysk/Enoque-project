@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect } from "react";
+import { LocalSalesAgent } from "./components/LocalSalesAgent";
 import {
   ArrowRight,
   BadgeCheck,
@@ -538,6 +539,7 @@ export default function Home() {
         <MessageCircle aria-hidden="true" />
         <span>Cotar agora</span>
       </a>
+      <LocalSalesAgent />
     </main>
   );
 }

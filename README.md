@@ -78,6 +78,8 @@ npm run build
 
 ```text
 app/
+├── components/
+│   └── LocalSalesAgent.tsx # Assistente comercial executado no navegador
 ├── globals.css      # Identidade visual, responsividade e animações
 ├── layout.tsx       # SEO, Open Graph, idioma e metadados globais
 ├── page.tsx         # Conteúdo, seções, CTAs e comportamento no scroll
@@ -113,6 +115,45 @@ const WHATSAPP_URL = "https://wa.me/...";
 Para trocar o número ou a mensagem inicial, altere essa constante. O número no
 link deve conter apenas código do país, DDD e telefone, sem espaços ou símbolos.
 Revise também o telefone exibido no rodapé.
+
+## Assistente comercial local
+
+O componente `app/components/LocalSalesAgent.tsx` implementa a assistente
+**Multi**. Ela funciona inteiramente no navegador e não utiliza API, modelo de
+linguagem, banco de dados ou serviço externo.
+
+O funcionamento é baseado em:
+
+- normalização do texto digitado;
+- identificação de palavras e expressões relacionadas a cada intenção;
+- respostas comerciais previamente revisadas;
+- perguntas rápidas para os temas mais procurados;
+- encaminhamento contextualizado ao WhatsApp;
+- avisos para não fornecer orientação médica ou condições não confirmadas.
+
+A constante `KNOWLEDGE_BASE` reúne as intenções reconhecidas e suas respostas.
+Para adicionar um novo assunto, inclua um objeto com `keywords`, `response` e,
+quando necessário, `showContact: true`.
+
+Exemplo:
+
+```ts
+{
+  keywords: ["odontologico", "dental"],
+  response: "Texto informativo revisado pela equipe.",
+  showContact: true,
+}
+```
+
+Como não existe inteligência generativa, a assistente não cria informações
+novas nem consulta preços, redes ou condições em tempo real. Essa decisão reduz
+custos e evita que informações comerciais não confirmadas sejam apresentadas
+ao visitante. A equipe deve revisar a base sempre que produtos ou regras forem
+alterados.
+
+As mensagens ficam somente no estado temporário do navegador e são descartadas
+quando a página é recarregada. O conteúdo só é enviado para fora do site quando
+o visitante decide clicar no botão de WhatsApp.
 
 ## Identidade visual
 

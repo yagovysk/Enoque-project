@@ -39,8 +39,12 @@ test("renderiza a página comercial da Multicorretora", async () => {
 });
 
 test("mantém os elementos essenciais de conversão e SEO no código", async () => {
-  const [page, layout, styles, robots, sitemap] = await Promise.all([
+  const [page, agent, layout, styles, robots, sitemap] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+    readFile(
+      new URL("../app/components/LocalSalesAgent.tsx", import.meta.url),
+      "utf8",
+    ),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../app/robots.ts", import.meta.url), "utf8"),
@@ -49,6 +53,11 @@ test("mantém os elementos essenciais de conversão e SEO no código", async () 
 
   assert.match(page, /wa\.me\/556184843238/);
   assert.match(page, /data-reveal/);
+  assert.match(page, /LocalSalesAgent/);
+  assert.match(agent, /KNOWLEDGE_BASE/);
+  assert.match(agent, /Conversa local, sem envio de dados/);
+  assert.match(agent, /wa\.me\/556184843238/);
+  assert.doesNotMatch(agent, /api\.openai\.com|OPENAI_API_KEY/);
   assert.match(page, /IntersectionObserver/);
   assert.match(styles, /prefers-reduced-motion/);
   assert.match(layout, /metadataBase/);
