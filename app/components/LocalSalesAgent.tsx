@@ -139,6 +139,7 @@ function findResponse(message: string): KnowledgeItem {
 
   return (
     match ?? {
+      keywords: [],
       response:
         "Posso ajudar a organizar essa decisão. Para começar, diga se você procura uma opção individual, familiar ou empresarial e o que mais pesa na escolha: preço, rede de atendimento ou cobertura. Se preferir, também posso encaminhar você diretamente a um especialista.",
       showContact: true,

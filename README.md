@@ -69,6 +69,7 @@ npm run build
 | --- | --- |
 | `npm run dev` | Inicia o site em desenvolvimento |
 | `npm run build` | Gera e valida a versão de produção |
+| `npm run build:netlify` | Gera a aplicação Next.js nativa na pasta `.next` para a Netlify |
 | `npm run start` | Executa localmente a versão gerada |
 | `npm run lint` | Verifica padrões do código |
 | `npm test` | Executa a rotina de testes configurada |
@@ -216,6 +217,25 @@ Esses dados aparecem em mais de um ponto da página. Ao alterá-los, pesquise pe
 valor antigo no projeto para garantir que todas as ocorrências sejam atualizadas.
 
 ## Hospedagem
+
+### Netlify
+
+O arquivo `netlify.toml` versionado na raiz configura automaticamente:
+
+- comando de build: `npm run build:netlify`;
+- diretório de publicação: `.next`;
+- Node.js `22.13.0`.
+
+Esse comando usa o build nativo do Next.js, que é o formato esperado pelo
+adaptador oficial da Netlify. Não configure o comando `npm run build` na
+interface da Netlify, pois esse comando gera o artefato `dist/` usado pelo
+Sites, e não a pasta `.next`.
+
+Depois de alterar a configuração, execute um novo deploy na Netlify com a opção
+de limpar o cache de build. O plugin `@netlify/plugin-nextjs`, quando já
+instalado pela interface, não precisa ser duplicado no `netlify.toml`.
+
+### Sites
 
 O projeto está preparado para publicação pelo Sites. O arquivo
 `.openai/hosting.json` contém somente a identificação do site e os bindings
