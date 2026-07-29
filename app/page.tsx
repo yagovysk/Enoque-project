@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect } from "react";
 import { LocalSalesAgent } from "./components/LocalSalesAgent";
+import { SITE_URL } from "./site-config";
 import {
   ArrowRight,
   BadgeCheck,
@@ -30,19 +31,19 @@ const WHATSAPP_URL =
 const services = [
   {
     icon: Users,
-    title: "Plano individual e familiar",
-    text: "Compare redes, coberturas e valores para proteger quem você ama sem escolher no escuro.",
+    title: "Plano de saúde individual e familiar",
+    text: "Compare redes, coberturas e valores de planos de saúde em Brasília para proteger quem você ama.",
     tag: "Para quem você ama",
   },
   {
     icon: BriefcaseBusiness,
-    title: "Plano empresarial",
-    text: "Encontre um benefício competitivo para cuidar da equipe e valorizar sua empresa.",
+    title: "Plano de saúde empresarial",
+    text: "Encontre um benefício competitivo no Distrito Federal para cuidar da equipe e valorizar sua empresa.",
     tag: "Soluções empresariais",
   },
   {
     icon: Stethoscope,
-    title: "Plano por adesão",
+    title: "Plano de saúde por adesão",
     text: "Descubra alternativas disponíveis para sua categoria profissional e amplie suas possibilidades.",
     tag: "Compare possibilidades",
   },
@@ -86,14 +87,19 @@ const steps = [
 
 const faqs = [
   {
+    question: "Como escolher um plano de saúde em Brasília?",
+    answer:
+      "Considere a rede de hospitais e laboratórios que você usa no Distrito Federal, o tipo de acomodação, a coparticipação, as carências e a faixa de investimento. A Multicorretora ajuda a comparar esses pontos antes da contratação.",
+  },
+  {
     question: "Como recebo uma cotação de plano de saúde?",
     answer:
       "Basta chamar a Multicorretora pelo WhatsApp e informar se o plano é individual, familiar ou empresarial. Nossa equipe entende o seu perfil e apresenta opções adequadas.",
   },
   {
-    question: "A Multicorretora atende empresas?",
+    question: "A Multicorretora atende empresas no Distrito Federal?",
     answer:
-      "Sim. Analisamos as necessidades da empresa e ajudamos a comparar planos e benefícios para equipes de diferentes portes.",
+      "Sim. Atendemos empresas em Brasília e no Distrito Federal, analisando as necessidades do negócio e comparando planos de saúde e benefícios para equipes de diferentes portes.",
   },
   {
     question: "Posso contratar proteção para toda a família?",
@@ -128,20 +134,71 @@ export default function Home() {
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "InsuranceAgency",
-    name: "Multicorretora Planos de Saúde e Seguros",
-    description:
-      "Consultoria em planos de saúde e seguros para pessoas, famílias e empresas.",
-    telephone: "+55 61 8484-3238",
-    taxID: "19.607.678/0001-65",
-    areaServed: "Distrito Federal",
-    image: "/logo-multicorretora-menu.jpeg",
-    contactPoint: {
-      "@type": "ContactPoint",
-      telephone: "+55 61 8484-3238",
-      contactType: "sales",
-      availableLanguage: "Portuguese",
-    },
+    "@graph": [
+      {
+        "@type": "InsuranceAgency",
+        "@id": `${SITE_URL}/#organization`,
+        name: "Multicorretora Planos de Saúde e Seguros",
+        url: SITE_URL,
+        logo: `${SITE_URL}/logo-multicorretora-menu.jpeg`,
+        image: `${SITE_URL}/og.png`,
+        description:
+          "Corretora de planos de saúde e seguros para pessoas, famílias e empresas em Brasília e no Distrito Federal.",
+        telephone: "+55 61 8484-3238",
+        taxID: "19.607.678/0001-65",
+        areaServed: [
+          {
+            "@type": "City",
+            name: "Brasília",
+          },
+          {
+            "@type": "AdministrativeArea",
+            name: "Distrito Federal",
+          },
+        ],
+        knowsAbout: [
+          "Plano de saúde individual",
+          "Plano de saúde familiar",
+          "Plano de saúde empresarial",
+          "Plano de saúde por adesão",
+          "Seguro saúde",
+          "Seguro de vida",
+          "Benefícios corporativos",
+        ],
+        contactPoint: {
+          "@type": "ContactPoint",
+          telephone: "+55 61 8484-3238",
+          contactType: "sales",
+          areaServed: "BR",
+          availableLanguage: "Portuguese",
+        },
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${SITE_URL}/#website`,
+        url: SITE_URL,
+        name: "Multicorretora",
+        inLanguage: "pt-BR",
+        publisher: {
+          "@id": `${SITE_URL}/#organization`,
+        },
+      },
+      {
+        "@type": "WebPage",
+        "@id": `${SITE_URL}/#webpage`,
+        url: SITE_URL,
+        name: "Plano de Saúde em Brasília e DF | Multicorretora",
+        description:
+          "Compare planos de saúde individuais, familiares e empresariais em Brasília e no Distrito Federal.",
+        inLanguage: "pt-BR",
+        isPartOf: {
+          "@id": `${SITE_URL}/#website`,
+        },
+        about: {
+          "@id": `${SITE_URL}/#organization`,
+        },
+      },
+    ],
   };
 
   return (
@@ -201,12 +258,14 @@ export default function Home() {
               Sua cotação começa aqui
             </div>
             <h1>
-              Encontre o plano certo <span>sem escolher no escuro.</span>
+              Encontre o plano de saúde certo em Brasília{" "}
+              <span>sem escolher no escuro.</span>
             </h1>
             <p className="hero-lead">
-              Compare opções para você, sua família ou sua empresa com uma
-              consultoria que explica cada detalhe e ajuda a evitar uma escolha
-              que não combina com o que você precisa.
+              Compare planos de saúde para você, sua família ou sua empresa em
+              Brasília e no Distrito Federal, com uma consultoria que explica
+              cada detalhe e ajuda a evitar uma escolha que não combina com o
+              que você precisa.
             </p>
             <div className="hero-actions">
               <a
@@ -374,12 +433,14 @@ export default function Home() {
             </div>
           </div>
           <div className="about-copy" data-reveal>
-            <span className="section-kicker">Por que a Multicorretora?</span>
-            <h2>Uma boa escolha começa com a orientação certa.</h2>
+            <span className="section-kicker">Corretora em Brasília e no DF</span>
+            <h2>
+              Planos de saúde e seguros com orientação para escolher melhor.
+            </h2>
             <p>
-              Redes, coberturas, carências e condições podem transformar uma
-              escolha simples em uma decisão difícil. Nós traduzimos os
-              detalhes, comparamos as alternativas e ajudamos você a avançar
+              A Multicorretora atende pessoas, famílias e empresas em Brasília
+              e no Distrito Federal. Traduzimos redes, coberturas, carências e
+              condições, comparamos as alternativas e ajudamos você a avançar
               com segurança.
             </p>
             <ul>

@@ -222,12 +222,14 @@ valor antigo no projeto para garantir que todas as ocorrências sejam atualizada
 
 O arquivo `netlify.toml` versionado na raiz configura automaticamente:
 
-- comando de build: `npm run build:netlify`;
+- comando de build: `NEXT_PUBLIC_SITE_URL=$URL npm run build:netlify`;
 - diretório de publicação: `.next`;
 - Node.js `22.13.0`.
 
 Esse comando usa o build nativo do Next.js, que é o formato esperado pelo
-adaptador oficial da Netlify. Não configure o comando `npm run build` na
+adaptador oficial da Netlify. A variável `URL`, fornecida pela própria Netlify,
+é usada para gerar URL canônica, sitemap, robots e dados estruturados com o
+endereço público correto. Não configure o comando `npm run build` na
 interface da Netlify, pois esse comando gera o artefato `dist/` usado pelo
 Sites, e não a pasta `.next`.
 

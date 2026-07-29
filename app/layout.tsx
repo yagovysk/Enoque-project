@@ -1,22 +1,27 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { SITE_URL } from "./site-config";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    "https://multicorretora-saude-seguros.togyro-yago-1881.chatgpt.site",
-  ),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "Multicorretora | Planos de Saúde e Seguros em Brasília",
+    default: "Plano de Saúde em Brasília e DF | Multicorretora",
     template: "%s | Multicorretora",
   },
   description:
-    "Compare planos de saúde e seguros para você, sua família ou sua empresa. Receba opções e orientação personalizada da Multicorretora pelo WhatsApp.",
+    "Compare planos de saúde individuais, familiares e empresariais em Brasília e no Distrito Federal. Fale com a Multicorretora e receba orientação personalizada.",
   keywords: [
     "plano de saúde Brasília",
+    "planos de saúde Brasília DF",
     "corretora de planos de saúde DF",
-    "seguro saúde Brasília",
+    "corretora de seguros Brasília",
     "plano de saúde familiar",
+    "plano de saúde familiar Brasília",
     "plano de saúde empresarial",
+    "plano empresarial Brasília",
+    "plano de saúde por adesão",
+    "cotação plano de saúde",
+    "seguro saúde Brasília",
     "seguro de vida DF",
     "Multicorretora",
   ],
@@ -32,11 +37,15 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "/",
+    languages: {
+      "pt-BR": "/",
+    },
   },
   openGraph: {
-    title: "Multicorretora | Planos de Saúde e Seguros",
+    title: "Plano de Saúde em Brasília e DF | Multicorretora",
     description:
-      "Compare planos de saúde e seguros com orientação clara. Receba opções personalizadas pelo WhatsApp.",
+      "Compare planos individuais, familiares e empresariais com orientação clara em Brasília e no Distrito Federal.",
+    url: SITE_URL,
     type: "website",
     locale: "pt_BR",
     siteName: "Multicorretora",
@@ -51,9 +60,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Multicorretora | Planos de Saúde e Seguros",
+    title: "Plano de Saúde em Brasília e DF | Multicorretora",
     description:
-      "Compare opções e encontre um plano alinhado ao que você realmente precisa.",
+      "Compare planos de saúde em Brasília e encontre uma opção alinhada ao seu perfil.",
     images: ["/og.png"],
   },
   robots: {

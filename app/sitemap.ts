@@ -1,9 +1,10 @@
 import type { MetadataRoute } from "next";
+import { SITE_URL } from "./site-config";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: "https://multicorretora-saude-seguros.togyro-yago-1881.chatgpt.site/",
+      url: `${SITE_URL}/`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 1,

@@ -30,7 +30,7 @@ test("renderiza a página comercial da Multicorretora", async () => {
 
   const html = await response.text();
   assert.match(html, /Multicorretora/);
-  assert.match(html, /Encontre o plano certo/);
+  assert.match(html, /Encontre o plano de sa\u00fade certo em Bras\u00edlia/);
   assert.match(html, /Receber opções no WhatsApp/);
   assert.match(html, /19\.607\.678\/0001-65/);
   assert.match(html, /application\/ld\+json/);
@@ -59,10 +59,12 @@ test("mantém os elementos essenciais de conversão e SEO no código", async () 
   assert.match(agent, /wa\.me\/556184843238/);
   assert.doesNotMatch(agent, /api\.openai\.com|OPENAI_API_KEY/);
   assert.match(page, /IntersectionObserver/);
+  assert.match(page, /Plano de Sa\u00fade em Bras\u00edlia e DF/);
+  assert.match(page, /"@type": "WebSite"/);
   assert.match(styles, /prefers-reduced-motion/);
   assert.match(layout, /metadataBase/);
   assert.match(layout, /openGraph/);
   assert.match(layout, /summary_large_image/);
   assert.match(robots, /sitemap/);
-  assert.match(sitemap, /multicorretora-saude-seguros/);
+  assert.match(sitemap, /SITE_URL/);
 });
