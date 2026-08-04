@@ -35,6 +35,9 @@ test("renderiza a página comercial da Multicorretora", async () => {
   assert.match(html, /19\.607\.678\/0001-65/);
   assert.match(html, /application\/ld\+json/);
   assert.match(html, /InsuranceAgency/);
+  assert.match(html, /Operadoras disponíveis/);
+  assert.match(html, /Bradesco Saúde/);
+  assert.match(html, /MedSênior/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
 });
 
@@ -54,6 +57,8 @@ test("mantém os elementos essenciais de conversão e SEO no código", async () 
   assert.match(page, /wa\.me\/556184843238/);
   assert.match(page, /data-reveal/);
   assert.match(page, /LocalSalesAgent/);
+  assert.match(page, /operadoras\/amil\.png/);
+  assert.match(page, /operadoras\/unity\.svg/);
   assert.match(agent, /KNOWLEDGE_BASE/);
   assert.match(agent, /Conversa local, sem envio de dados/);
   assert.match(agent, /wa\.me\/556184843238/);

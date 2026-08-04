@@ -88,6 +88,7 @@ app/
 └── sitemap.ts       # Mapa do site
 
 public/
+├── operadoras/                        # Logos exibidas nos cards de operadoras
 ├── familia-hero.png                 # Fotografia da seção principal
 ├── familia-geracoes.png             # Fotografia da seção institucional
 ├── logo-multicorretora-menu.jpeg    # Logo usada no menu e rodapé
@@ -190,6 +191,12 @@ As imagens visíveis no site ficam em `public/` e são carregadas pelo component
 
 A imagem `public/og.png` é exibida quando o endereço do site é compartilhado em
 aplicativos e redes que suportam Open Graph.
+
+As logos da seção de operadoras ficam em `public/operadoras/`. Os arquivos de
+Amil, Unimed, Quality Pró Saúde, Unity Saúde, Proasa Saúde e MedSênior foram
+obtidos nos canais oficiais das marcas. O arquivo `operadoras-referencia.png`
+preserva os recortes fornecidos para Bradesco Saúde, SulAmérica, Esyplan Saúde
+e Best Senior. Não altere cores, proporções ou grafia das marcas.
 
 ## SEO
 

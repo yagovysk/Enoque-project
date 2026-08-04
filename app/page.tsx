@@ -28,6 +28,63 @@ import {
 const WHATSAPP_URL =
   "https://wa.me/556184843238?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Multicorretora%20e%20quero%20comparar%20planos%20para%20encontrar%20a%20melhor%20op%C3%A7%C3%A3o%20para%20mim.";
 
+const operators = [
+  {
+    name: "Amil",
+    logo: "/operadoras/amil.png",
+    width: 300,
+    height: 107,
+  },
+  {
+    name: "Unimed",
+    logo: "/operadoras/unimed.png",
+    width: 164,
+    height: 59,
+  },
+  {
+    name: "Bradesco Saúde",
+    sprite: "operator-sprite-bradesco",
+  },
+  {
+    name: "SulAmérica",
+    sprite: "operator-sprite-sulamerica",
+  },
+  {
+    name: "Quality Pró Saúde",
+    logo: "/operadoras/quallity.png",
+    width: 166,
+    height: 68,
+    dark: true,
+  },
+  {
+    name: "Unity Saúde",
+    logo: "/operadoras/unity.svg",
+    width: 1355,
+    height: 432,
+  },
+  {
+    name: "Esyplan Saúde",
+    sprite: "operator-sprite-esyplan",
+  },
+  {
+    name: "Proasa Saúde",
+    logo: "/operadoras/proasa.webp",
+    width: 575,
+    height: 96,
+    wide: true,
+  },
+  {
+    name: "MedSênior",
+    logo: "/operadoras/medsenior.png",
+    width: 2560,
+    height: 885,
+  },
+  {
+    name: "Best Senior",
+    sprite: "operator-sprite-best",
+  },
+];
+
 const services = [
   {
     icon: Users,
@@ -110,6 +167,11 @@ const faqs = [
     question: "Vocês também trabalham com seguros?",
     answer:
       "Sim. Além de planos de saúde, a Multicorretora oferece consultoria em seguros para ampliar a proteção pessoal, familiar e empresarial.",
+  },
+  {
+    question: "Com quais operadoras de planos de saúde vocês trabalham?",
+    answer:
+      "A Multicorretora oferece opções de Amil, Unimed, Bradesco Saúde, SulAmérica, Quality Pró Saúde, Unity Saúde, Esyplan Saúde, Proasa Saúde, MedSênior e Best Senior. A disponibilidade varia conforme região, perfil e modalidade de contratação.",
   },
 ];
 
@@ -231,6 +293,7 @@ export default function Home() {
           </a>
           <nav aria-label="Navegação principal">
             <a href="#solucoes">Soluções</a>
+            <a href="#operadoras">Operadoras</a>
             <a href="#como-funciona">Como funciona</a>
             <a href="#sobre">Sobre nós</a>
             <a href="#duvidas">Dúvidas</a>
@@ -359,6 +422,74 @@ export default function Home() {
               <strong>Evite pagar pelo que não usa</strong>
               Compare o que realmente importa
             </span>
+          </div>
+        </div>
+      </section>
+
+      <section className="section operators-section" id="operadoras">
+        <div className="operators-glow operators-glow-one" aria-hidden="true" />
+        <div className="operators-glow operators-glow-two" aria-hidden="true" />
+        <div className="container">
+          <div className="operators-heading" data-reveal>
+            <div>
+              <span className="section-kicker light">Operadoras disponíveis</span>
+              <h2>Grandes marcas. Uma comparação feita para você.</h2>
+            </div>
+            <p>
+              Compare rede, cobertura, carência e investimento entre diferentes
+              operadoras com a orientação da Multicorretora.
+            </p>
+          </div>
+
+          <div className="operators-grid">
+            {operators.map((operator, index) => (
+              <a
+                className="operator-card"
+                data-reveal
+                href={WHATSAPP_URL}
+                key={operator.name}
+                rel="noreferrer"
+                style={{ "--delay": `${index * 55}ms` } as React.CSSProperties}
+                target="_blank"
+                aria-label={`Consultar planos da ${operator.name} pelo WhatsApp`}
+              >
+                <span
+                  className={`operator-logo-frame${operator.dark ? " is-dark" : ""}`}
+                >
+                  {operator.logo ? (
+                    <Image
+                      src={operator.logo}
+                      alt={`Logo ${operator.name}`}
+                      width={operator.width}
+                      height={operator.height}
+                      className={operator.wide ? "operator-logo-wide" : undefined}
+                    />
+                  ) : (
+                    <span
+                      className={`operator-sprite ${operator.sprite}`}
+                      role="img"
+                      aria-label={`Logo ${operator.name}`}
+                    />
+                  )}
+                </span>
+                <span className="operator-card-footer">
+                  <span>
+                    <small>Consulte disponibilidade</small>
+                    <strong>{operator.name}</strong>
+                  </span>
+                  <ArrowRight aria-hidden="true" />
+                </span>
+              </a>
+            ))}
+          </div>
+
+          <div className="operators-note" data-reveal>
+            <ShieldCheck aria-hidden="true" />
+            <p>
+              As marcas pertencem aos respectivos titulares. Operadoras e
+              condições estão sujeitas à disponibilidade por região, faixa
+              etária, produto e modalidade de contratação.
+            </p>
           </div>
         </div>
       </section>
@@ -568,6 +699,7 @@ export default function Home() {
           <div className="footer-nav">
             <strong>Navegação</strong>
             <a href="#solucoes">Soluções</a>
+            <a href="#operadoras">Operadoras</a>
             <a href="#sobre">Sobre nós</a>
             <a href="#como-funciona">Como funciona</a>
             <a href="#duvidas">Dúvidas</a>
