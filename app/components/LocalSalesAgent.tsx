@@ -162,6 +162,9 @@ export function LocalSalesAgent() {
   const [messages, setMessages] = useState<ChatMessage[]>([INITIAL_MESSAGE]);
   const [lastQuestion, setLastQuestion] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const launcherRef = useRef<HTMLButtonElement>(null);
+  const wasOpenRef = useRef(false);
   const nextId = useRef(2);
 
   useEffect(() => {
@@ -169,6 +172,25 @@ export function LocalSalesAgent() {
       messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }
   }, [isOpen, messages]);
+
+  useEffect(() => {
+    if (isOpen) {
+      wasOpenRef.current = true;
+      closeButtonRef.current?.focus();
+
+      const closeOnEscape = (event: KeyboardEvent) => {
+        if (event.key === "Escape") setIsOpen(false);
+      };
+
+      document.addEventListener("keydown", closeOnEscape);
+      return () => document.removeEventListener("keydown", closeOnEscape);
+    }
+
+    if (wasOpenRef.current) {
+      launcherRef.current?.focus();
+      wasOpenRef.current = false;
+    }
+  }, [isOpen]);
 
   function sendMessage(rawMessage: string) {
     const message = rawMessage.trim();
@@ -201,16 +223,27 @@ export function LocalSalesAgent() {
   }
 
   return (
-    <aside className="sales-agent" aria-label="Assistente virtual da Multicorretora">
+    <aside
+      className="sales-agent"
+      id="assistente-multi"
+      tabIndex={-1}
+      aria-label="Assistente virtual da Multicorretora"
+    >
       {isOpen && (
-        <section className="agent-panel" aria-label="Conversa com a assistente Multi">
+        <section
+          className="agent-panel"
+          role="dialog"
+          aria-modal="false"
+          aria-labelledby="agent-title"
+          aria-describedby="agent-description"
+        >
           <header className="agent-header">
             <div className="agent-identity">
               <span className="agent-avatar">
                 <Bot aria-hidden="true" />
               </span>
               <span>
-                <strong>Multi</strong>
+                <strong id="agent-title">Multi</strong>
                 <small>
                   <i aria-hidden="true" />
                   Assistente comercial online
@@ -220,6 +253,7 @@ export function LocalSalesAgent() {
             <button
               type="button"
               className="agent-close"
+              ref={closeButtonRef}
               onClick={() => setIsOpen(false)}
               aria-label="Fechar assistente"
             >
@@ -227,12 +261,18 @@ export function LocalSalesAgent() {
             </button>
           </header>
 
-          <div className="agent-value-strip">
+          <div className="agent-value-strip" id="agent-description">
             <Sparkles aria-hidden="true" />
             Tire dúvidas, compare prioridades e avance para sua cotação.
           </div>
 
-          <div className="agent-messages" aria-live="polite">
+          <div
+            className="agent-messages"
+            role="log"
+            aria-live="polite"
+            aria-label="Mensagens da conversa"
+            aria-relevant="additions text"
+          >
             {messages.map((message) => (
               <div
                 className={`agent-message agent-message-${message.role}`}
@@ -321,6 +361,7 @@ export function LocalSalesAgent() {
         <button
           type="button"
           className="agent-launcher"
+          ref={launcherRef}
           onClick={() => setIsOpen(true)}
           aria-expanded="false"
           aria-label="Abrir assistente Multi"

@@ -17,6 +17,31 @@
   --shadow: 0 24px 70px rgba(4, 27, 56, 0.12);
 }
 
+.skip-link {
+  position: fixed;
+  z-index: 200;
+  top: 12px;
+  left: 12px;
+  border: 3px solid #ffffff;
+  border-radius: 8px;
+  padding: 12px 16px;
+  background: #000000;
+  color: #ffffff;
+  font-weight: 800;
+  transform: translateY(-160%);
+  transition: transform 160ms ease;
+}
+
+.skip-link-chat {
+  left: 250px;
+}
+
+.skip-link:focus {
+  outline: 3px solid #ffdf00;
+  outline-offset: 2px;
+  transform: translateY(0);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -33,6 +58,10 @@ body {
     "Segoe UI", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+section[id] {
+  scroll-margin-top: 105px;
 }
 
 a {
@@ -58,15 +87,55 @@ img {
 .topbar {
   background: var(--navy-950);
   color: #a9bad0;
-  font-size: 0.76rem;
+  font-size: 0.82rem;
   letter-spacing: 0.035em;
 }
 
 .topbar-inner {
-  min-height: 34px;
+  min-height: 42px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.accessibility-controls {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.accessibility-controls strong {
+  margin-right: 3px;
+  color: #ffffff;
+  font-size: 0.78rem;
+}
+
+.accessibility-controls button {
+  min-width: 38px;
+  min-height: 34px;
+  border: 1px solid #7390ab;
+  border-radius: 7px;
+  padding: 4px 9px;
+  background: #102d4d;
+  color: #ffffff;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+}
+
+.accessibility-controls button:hover,
+.accessibility-controls button[aria-pressed="true"] {
+  border-color: var(--green-300);
+  background: #0b7655;
+}
+
+.accessibility-controls button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
+.accessibility-controls .contrast-control {
+  min-width: 118px;
 }
 
 .topbar span {
@@ -123,6 +192,7 @@ nav {
 
 nav a {
   position: relative;
+  padding-block: 12px;
   transition: color 180ms ease;
 }
 
@@ -171,8 +241,11 @@ nav a:focus-visible::after {
 }
 
 .button:focus-visible,
+button:focus-visible,
 a:focus-visible,
-summary:focus-visible {
+summary:focus-visible,
+input:focus-visible,
+[tabindex]:focus-visible {
   outline: 3px solid var(--green-300);
   outline-offset: 3px;
 }
@@ -928,7 +1001,7 @@ summary:focus-visible {
   min-height: 65px;
   margin: 0 0 26px;
   color: var(--muted);
-  font-size: 0.88rem;
+  font-size: 0.95rem;
   line-height: 1.65;
 }
 
@@ -958,7 +1031,7 @@ summary:focus-visible {
 .disclaimer {
   margin: 20px 0 0;
   color: #8793a1;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
 }
 
 .about-section {
@@ -1370,7 +1443,7 @@ footer {
   max-width: 300px;
   margin: 18px 0 0;
   color: #7e91a7;
-  font-size: 0.82rem;
+  font-size: 0.9rem;
   line-height: 1.7;
 }
 
@@ -1380,7 +1453,14 @@ footer {
   align-content: start;
   gap: 13px;
   color: #899cb0;
-  font-size: 0.8rem;
+  font-size: 0.86rem;
+}
+
+.footer-nav a,
+.footer-contact a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
 }
 
 .footer-nav strong,
@@ -1420,7 +1500,7 @@ footer {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   padding-top: 24px;
   color: #60768c;
-  font-size: 0.68rem;
+  font-size: 0.76rem;
 }
 
 .footer-credit a {
@@ -1555,7 +1635,7 @@ footer {
   gap: 6px;
   margin-top: 4px;
   color: #a9c1ca;
-  font-size: 0.68rem;
+  font-size: 0.75rem;
 }
 
 .agent-identity small i {
@@ -1568,8 +1648,8 @@ footer {
 
 .agent-close {
   display: grid;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   place-items: center;
   border: 0;
   border-radius: 11px;
@@ -1595,7 +1675,7 @@ footer {
   padding: 10px 17px;
   background: #eef8f4;
   color: #376356;
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   font-weight: 650;
 }
 
@@ -1630,7 +1710,7 @@ footer {
   background: white;
   box-shadow: 0 5px 18px rgba(7, 47, 58, 0.06);
   color: #344d5e;
-  font-size: 0.78rem;
+  font-size: 0.9rem;
   line-height: 1.62;
 }
 
@@ -1653,7 +1733,7 @@ footer {
   border-radius: 8px;
   background: linear-gradient(145deg, var(--green-400), var(--green-600));
   color: white;
-  font-size: 0.65rem;
+  font-size: 0.72rem;
   font-weight: 850;
 }
 
@@ -1697,13 +1777,13 @@ footer {
 }
 
 .agent-contact-card strong {
-  font-size: 0.72rem;
+  font-size: 0.8rem;
 }
 
 .agent-contact-card small {
   margin-top: 3px;
   color: #6a817a;
-  font-size: 0.59rem;
+  font-size: 0.7rem;
 }
 
 .agent-contact-card > svg {
@@ -1728,7 +1808,8 @@ footer {
   color: #355e52;
   cursor: pointer;
   font-family: inherit;
-  font-size: 0.65rem;
+  min-height: 44px;
+  font-size: 0.76rem;
   font-weight: 700;
   line-height: 1.3;
   text-wrap: balance;
@@ -1760,7 +1841,7 @@ footer {
   background: #f8fbfa;
   color: var(--ink);
   font: inherit;
-  font-size: 0.76rem;
+  font-size: 0.9rem;
   outline: none;
   transition:
     border 180ms ease,
@@ -1774,8 +1855,8 @@ footer {
 
 .agent-form button {
   display: grid;
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   place-items: center;
   border: 0;
   border-radius: 12px;
@@ -1809,7 +1890,7 @@ footer {
   padding: 7px 14px 9px;
   background: white;
   color: #81948e;
-  font-size: 0.56rem;
+  font-size: 0.68rem;
 }
 
 .agent-footer span {
@@ -1881,7 +1962,7 @@ footer {
 }
 
 .launcher-copy {
-  font-size: 0.77rem;
+  font-size: 0.86rem;
   font-weight: 800;
 }
 
@@ -1889,7 +1970,7 @@ footer {
   display: block;
   margin-bottom: 4px;
   color: #9fb4c6;
-  font-size: 0.61rem;
+  font-size: 0.7rem;
   font-weight: 650;
 }
 
@@ -1911,7 +1992,7 @@ footer {
   gap: 5px;
   margin-right: 8px;
   color: #52667a;
-  font-size: 0.61rem;
+  font-size: 0.7rem;
   font-weight: 700;
 }
 
@@ -1978,6 +2059,84 @@ footer {
   }
 }
 
+html[data-high-contrast] {
+  --navy-950: #000000;
+  --navy-900: #000000;
+  --navy-800: #071426;
+  --navy-700: #102b4d;
+  --green-600: #006b43;
+  --green-500: #007a4b;
+  --green-400: #6fffc0;
+  --green-300: #ffdf00;
+  --mist: #ffffff;
+  --ink: #000000;
+  --muted: #273444;
+  --line: #506070;
+}
+
+html[data-high-contrast] body,
+html[data-high-contrast] .services,
+html[data-high-contrast] .faq,
+html[data-high-contrast] .benefit-strip {
+  background: #ffffff;
+  color: #000000;
+}
+
+html[data-high-contrast] .topbar,
+html[data-high-contrast] .site-header,
+html[data-high-contrast] .hero,
+html[data-high-contrast] .operators-section,
+html[data-high-contrast] .process,
+html[data-high-contrast] footer {
+  background: #000000;
+}
+
+html[data-high-contrast] .service-card,
+html[data-high-contrast] .operator-card,
+html[data-high-contrast] .faq-list details,
+html[data-high-contrast] .agent-panel,
+html[data-high-contrast] .agent-message p,
+html[data-high-contrast] .agent-suggestions button,
+html[data-high-contrast] .agent-form input {
+  border-color: #000000;
+  background: #ffffff;
+  color: #000000;
+}
+
+html[data-high-contrast] .hero-lead,
+html[data-high-contrast] .step-card p,
+html[data-high-contrast] .operators-heading p,
+html[data-high-contrast] .operators-note,
+html[data-high-contrast] .footer-brand p,
+html[data-high-contrast] .footer-nav,
+html[data-high-contrast] .footer-contact,
+html[data-high-contrast] .footer-bottom,
+html[data-high-contrast] .about-card p {
+  color: #ffffff;
+}
+
+html[data-high-contrast] .button-primary,
+html[data-high-contrast] .whatsapp-float,
+html[data-high-contrast] .agent-form button {
+  background: #006b43;
+  color: #ffffff;
+}
+
+html[data-high-contrast] a:not(.button):not(.operator-card):not(.brand):focus-visible,
+html[data-high-contrast] button:focus-visible,
+html[data-high-contrast] summary:focus-visible,
+html[data-high-contrast] input:focus-visible,
+html[data-high-contrast] [tabindex]:focus-visible {
+  outline-color: #ffdf00;
+  outline-width: 4px;
+}
+
+html[data-high-contrast] .accessibility-controls button[aria-pressed="true"] {
+  border-color: #ffdf00;
+  background: #ffffff;
+  color: #000000;
+}
+
 @media (max-width: 980px) {
   nav {
     display: none;
@@ -2037,10 +2196,31 @@ footer {
 
   .topbar-inner {
     justify-content: center;
+    padding-block: 6px;
   }
 
-  .topbar-inner span:last-child {
+  .topbar-inner > span:first-child,
+  .company-document {
     display: none;
+  }
+
+  .accessibility-controls {
+    width: 100%;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .accessibility-controls strong {
+    font-size: 0.72rem;
+  }
+
+  .accessibility-controls .contrast-control {
+    min-width: 105px;
+  }
+
+  .skip-link-chat {
+    top: 72px;
+    left: 12px;
   }
 
   .nav-wrap {

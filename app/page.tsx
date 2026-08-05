@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { LocalSalesAgent } from "./components/LocalSalesAgent";
 import { SITE_URL } from "./site-config";
 import {
@@ -176,6 +176,34 @@ const faqs = [
 ];
 
 export default function Home() {
+  const [fontScale, setFontScale] = useState(1);
+  const [highContrast, setHighContrast] = useState(false);
+  const [accessibilityReady, setAccessibilityReady] = useState(false);
+
+  useEffect(() => {
+    const loadSavedPreferences = window.setTimeout(() => {
+      const savedScale = Number(localStorage.getItem("multicorretora-font-scale"));
+      const savedContrast = localStorage.getItem("multicorretora-high-contrast");
+
+      if ([1, 1.125, 1.25].includes(savedScale)) {
+        setFontScale(savedScale);
+      }
+      setHighContrast(savedContrast === "true");
+      setAccessibilityReady(true);
+    }, 0);
+
+    return () => window.clearTimeout(loadSavedPreferences);
+  }, []);
+
+  useEffect(() => {
+    if (!accessibilityReady) return;
+
+    document.documentElement.style.fontSize = `${fontScale * 100}%`;
+    document.documentElement.toggleAttribute("data-high-contrast", highContrast);
+    localStorage.setItem("multicorretora-font-scale", String(fontScale));
+    localStorage.setItem("multicorretora-high-contrast", String(highContrast));
+  }, [accessibilityReady, fontScale, highContrast]);
+
   useEffect(() => {
     const targets = document.querySelectorAll<HTMLElement>("[data-reveal]");
     const observer = new IntersectionObserver(
@@ -264,7 +292,13 @@ export default function Home() {
   };
 
   return (
-    <main>
+    <>
+      <a className="skip-link" href="#conteudo-principal">
+        Pular para o conteúdo principal
+      </a>
+      <a className="skip-link skip-link-chat" href="#assistente-multi">
+        Pular para a assistente virtual
+      </a>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -276,7 +310,42 @@ export default function Home() {
             <ShieldCheck size={15} aria-hidden="true" />
             Consultoria em saúde e proteção
           </span>
-          <span>CNPJ 19.607.678/0001-65</span>
+          <div
+            className="accessibility-controls"
+            role="group"
+            aria-label="Controles de acessibilidade"
+          >
+            <strong>Acessibilidade</strong>
+            <button
+              type="button"
+              onClick={() => setFontScale((size) => Math.max(1, size - 0.125))}
+              disabled={fontScale === 1}
+              aria-label="Diminuir tamanho do texto"
+            >
+              A−
+            </button>
+            <button
+              type="button"
+              onClick={() => setFontScale((size) => Math.min(1.25, size + 0.125))}
+              disabled={fontScale === 1.25}
+              aria-label="Aumentar tamanho do texto"
+            >
+              A+
+            </button>
+            <button
+              type="button"
+              className="contrast-control"
+              onClick={() => setHighContrast((active) => !active)}
+              aria-pressed={highContrast}
+            >
+              Alto contraste
+            </button>
+          </div>
+          <span className="company-document">CNPJ 19.607.678/0001-65</span>
+          <span className="sr-only" aria-live="polite" aria-atomic="true">
+            Texto em {Math.round(fontScale * 100)} por cento.
+            {highContrast ? " Alto contraste ativado." : " Alto contraste desativado."}
+          </span>
         </div>
       </div>
 
@@ -310,7 +379,8 @@ export default function Home() {
         </div>
       </header>
 
-      <section className="hero" id="inicio">
+      <main id="conteudo-principal" tabIndex={-1}>
+      <section className="hero" id="inicio" aria-labelledby="titulo-principal">
         <div className="hero-grid-lines" aria-hidden="true" />
         <div className="orb orb-one" aria-hidden="true" />
         <div className="orb orb-two" aria-hidden="true" />
@@ -320,7 +390,7 @@ export default function Home() {
               <Sparkles size={16} aria-hidden="true" />
               Sua cotação começa aqui
             </div>
-            <h1>
+            <h1 id="titulo-principal">
               Encontre o plano de saúde certo em Brasília{" "}
               <span>sem escolher no escuro.</span>
             </h1>
@@ -357,7 +427,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="hero-visual" aria-label="Proteção para você, sua família e sua empresa">
+          <div className="hero-visual">
             <div className="visual-glow" aria-hidden="true" />
             <div className="family-hero-card">
               <Image
@@ -426,14 +496,14 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section operators-section" id="operadoras">
+      <section className="section operators-section" id="operadoras" aria-labelledby="titulo-operadoras">
         <div className="operators-glow operators-glow-one" aria-hidden="true" />
         <div className="operators-glow operators-glow-two" aria-hidden="true" />
         <div className="container">
           <div className="operators-heading" data-reveal>
             <div>
               <span className="section-kicker light">Operadoras disponíveis</span>
-              <h2>Grandes marcas. Uma comparação feita para você.</h2>
+              <h2 id="titulo-operadoras">Grandes marcas. Uma comparação feita para você.</h2>
             </div>
             <p>
               Compare rede, cobertura, carência e investimento entre diferentes
@@ -494,12 +564,12 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section services" id="solucoes">
+      <section className="section services" id="solucoes" aria-labelledby="titulo-solucoes">
         <div className="container">
           <div className="section-heading" data-reveal>
             <div>
               <span className="section-kicker">Nossas soluções</span>
-              <h2>Compare hoje. Escolha com mais confiança.</h2>
+              <h2 id="titulo-solucoes">Compare hoje. Escolha com mais confiança.</h2>
             </div>
             <p>
               Você conta o que precisa. Nós ajudamos a filtrar as opções e
@@ -537,7 +607,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section about-section" id="sobre">
+      <section className="section about-section" id="sobre" aria-labelledby="titulo-sobre">
         <div className="container about-layout">
           <div className="about-visual" data-reveal>
             <div className="about-card">
@@ -565,7 +635,7 @@ export default function Home() {
           </div>
           <div className="about-copy" data-reveal>
             <span className="section-kicker">Corretora em Brasília e no DF</span>
-            <h2>
+            <h2 id="titulo-sobre">
               Planos de saúde e seguros com orientação para escolher melhor.
             </h2>
             <p>
@@ -605,11 +675,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section process" id="como-funciona">
+      <section className="section process" id="como-funciona" aria-labelledby="titulo-processo">
         <div className="container">
           <div className="center-heading" data-reveal>
             <span className="section-kicker">Simples do começo ao fim</span>
-            <h2>Da dúvida à cotação em três passos.</h2>
+            <h2 id="titulo-processo">Da dúvida à cotação em três passos.</h2>
             <p>Sem formulários longos. Comece agora com uma conversa.</p>
           </div>
           <div className="steps-grid">
@@ -620,7 +690,7 @@ export default function Home() {
                 style={{ "--delay": `${index * 100}ms` } as React.CSSProperties}
                 key={step.number}
               >
-                <span className="step-number">{step.number}</span>
+                <span className="step-number" aria-hidden="true">{step.number}</span>
                 <div className="step-icon">
                   {index === 0 && <MessageCircle aria-hidden="true" />}
                   {index === 1 && <Star aria-hidden="true" />}
@@ -634,11 +704,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section faq" id="duvidas">
+      <section className="section faq" id="duvidas" aria-labelledby="titulo-duvidas">
         <div className="container faq-layout">
           <div className="faq-intro" data-reveal>
             <span className="section-kicker">Perguntas frequentes</span>
-            <h2>Tire a dúvida que está adiando sua escolha.</h2>
+            <h2 id="titulo-duvidas">Tire a dúvida que está adiando sua escolha.</h2>
             <p>
               Se uma rede, cobertura ou condição ainda não ficou clara, fale
               com a nossa equipe antes de decidir.
@@ -653,7 +723,7 @@ export default function Home() {
               <details key={faq.question}>
                 <summary>
                   {faq.question}
-                  <span>+</span>
+                  <span aria-hidden="true">+</span>
                 </summary>
                 <p>{faq.answer}</p>
               </details>
@@ -684,6 +754,7 @@ export default function Home() {
           </a>
         </div>
       </section>
+      </main>
 
       <footer>
         <div className="container footer-main">
@@ -743,6 +814,6 @@ export default function Home() {
         <span>Cotar agora</span>
       </a>
       <LocalSalesAgent />
-    </main>
+    </>
   );
 }
