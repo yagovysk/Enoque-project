@@ -317,24 +317,24 @@ export function LocalSalesAgent() {
         </section>
       )}
 
-      <button
-        type="button"
-        className={`agent-launcher ${isOpen ? "is-open" : ""}`}
-        onClick={() => setIsOpen((current) => !current)}
-        aria-expanded={isOpen}
-        aria-label={isOpen ? "Fechar assistente Multi" : "Abrir assistente Multi"}
-      >
-        <span className="launcher-icon">
-          {isOpen ? <X aria-hidden="true" /> : <Bot aria-hidden="true" />}
-        </span>
-        {!isOpen && (
+      {!isOpen && (
+        <button
+          type="button"
+          className="agent-launcher"
+          onClick={() => setIsOpen(true)}
+          aria-expanded="false"
+          aria-label="Abrir assistente Multi"
+        >
+          <span className="launcher-icon">
+            <Bot aria-hidden="true" />
+          </span>
           <span className="launcher-copy">
             <small>Ficou com dúvida?</small>
             Fale com a Multi
           </span>
-        )}
-        {!isOpen && <i className="launcher-status" aria-hidden="true" />}
-      </button>
+          <i className="launcher-status" aria-hidden="true" />
+        </button>
+      )}
 
       {!isOpen && (
         <div className="agent-proof">
