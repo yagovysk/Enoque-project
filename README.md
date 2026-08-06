@@ -11,9 +11,10 @@ Seguros**, desenvolvido em Next.js com foco em:
 
 ## Visão geral
 
-O projeto é uma landing page de rota única. Todo o conteúdo comercial está em
-`app/page.tsx`, os estilos ficam em `app/globals.css` e os metadados de SEO
-estão em `app/layout.tsx`.
+O projeto possui uma página principal e páginas específicas para intenções de
+busca. O conteúdo institucional está em `app/page.tsx`, as páginas de aquisição
+ficam nas pastas `app/plano-de-saude-*`, os estilos estão em `app/globals.css`
+e os metadados globais de SEO ficam em `app/layout.tsx`.
 
 O site utiliza o starter `vinext`, que adapta a aplicação Next.js para execução
 em infraestrutura compatível com Cloudflare Workers.
@@ -80,11 +81,18 @@ npm run build
 ```text
 app/
 ├── components/
-│   └── LocalSalesAgent.tsx # Assistente comercial executado no navegador
+│   ├── AccessibilityControls.tsx # Tamanho de texto e alto contraste
+│   ├── LocalSalesAgent.tsx       # Assistente comercial local
+│   └── SeoLandingPage.tsx        # Estrutura compartilhada das páginas de aquisição
 ├── globals.css      # Identidade visual, responsividade e animações
 ├── layout.tsx       # SEO, Open Graph, idioma e metadados globais
+├── manifest.ts      # Manifesto do site
 ├── page.tsx         # Conteúdo, seções, CTAs e comportamento no scroll
+├── plano-de-saude-familiar-brasilia/page.tsx
+├── plano-de-saude-individual-brasilia/page.tsx
+├── plano-de-saude-empresarial-brasilia/page.tsx
 ├── robots.ts        # Regras para mecanismos de busca
+├── site-config.ts   # Domínio, WhatsApp e dados comerciais compartilhados
 └── sitemap.ts       # Mapa do site
 
 public/
@@ -108,10 +116,10 @@ Os textos da página ficam em `app/page.tsx`.
 - O array `faqs` controla as perguntas frequentes.
 - O restante da página está organizado em seções semânticas.
 
-O link utilizado por todos os botões de contato é definido uma única vez:
+O link utilizado pelos botões de contato é definido em `app/site-config.ts`:
 
 ```ts
-const WHATSAPP_URL = "https://wa.me/...";
+export const WHATSAPP_URL = "https://wa.me/...";
 ```
 
 Para trocar o número ou a mensagem inicial, altere essa constante. O número no
@@ -208,11 +216,16 @@ O projeto já possui:
 - URL canônica;
 - `robots.txt` gerado por `app/robots.ts`;
 - `sitemap.xml` gerado por `app/sitemap.ts`;
-- dados estruturados `InsuranceAgency` em JSON-LD;
+- verificação de propriedade do Google Search Console;
+- dados estruturados de organização, serviços, FAQ e navegação em JSON-LD;
+- páginas exclusivas para planos familiares, individuais e empresariais;
+- sitemap de páginas e imagens;
 - hierarquia semântica de títulos e seções.
 
-Quando um domínio próprio for conectado, atualize `metadataBase` em
-`app/layout.tsx` e a URL retornada por `app/sitemap.ts`.
+O domínio canônico é `https://multicorretora.com.br` e está centralizado em
+`app/site-config.ts`. Depois de publicar alterações importantes, envie
+`https://multicorretora.com.br/sitemap.xml` no Search Console e solicite a
+indexação das páginas novas pela ferramenta de inspeção de URL.
 
 ## Informações comerciais
 
@@ -229,16 +242,15 @@ valor antigo no projeto para garantir que todas as ocorrências sejam atualizada
 
 O arquivo `netlify.toml` versionado na raiz configura automaticamente:
 
-- comando de build: `NEXT_PUBLIC_SITE_URL=$URL npm run build:netlify`;
+- comando de build: `npm run build:netlify`;
 - diretório de publicação: `.next`;
 - Node.js `22.13.0`.
 
 Esse comando usa o build nativo do Next.js, que é o formato esperado pelo
-adaptador oficial da Netlify. A variável `URL`, fornecida pela própria Netlify,
-é usada para gerar URL canônica, sitemap, robots e dados estruturados com o
-endereço público correto. Não configure o comando `npm run build` na
-interface da Netlify, pois esse comando gera o artefato `dist/` usado pelo
-Sites, e não a pasta `.next`.
+adaptador oficial da Netlify. A URL canônica é definida em `app/site-config.ts`
+para impedir que endereços temporários de deploy substituam o domínio oficial.
+Não configure o comando `npm run build` na interface da Netlify, pois ele gera
+o artefato `dist/` usado pelo Sites, e não a pasta `.next`.
 
 Depois de alterar a configuração, execute um novo deploy na Netlify com a opção
 de limpar o cache de build. O plugin `@netlify/plugin-nextjs`, quando já

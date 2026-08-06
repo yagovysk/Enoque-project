@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     template: "%s | Multicorretora",
   },
   description:
-    "Compare planos de saúde individuais, familiares e empresariais em Brasília e no Distrito Federal. Fale com a Multicorretora e receba orientação personalizada.",
+    "Compare planos de saúde individuais, familiares e empresariais em Brasília e no DF. Receba uma cotação personalizada da Multicorretora pelo WhatsApp.",
   keywords: [
     "plano de saúde Brasília",
     "planos de saúde Brasília DF",
@@ -35,6 +35,10 @@ export const metadata: Metadata = {
   publisher: "Multicorretora",
   applicationName: "Multicorretora",
   category: "Saúde e Seguros",
+  verification: {
+    google: "1ztyvGNqZukwjXiim3kmT7uPf0Bx0r6W28ENLOl8foU",
+  },
+  manifest: "/manifest.webmanifest",
   formatDetection: {
     email: false,
     address: false,
@@ -49,7 +53,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Plano de Saúde em Brasília e DF | Multicorretora",
     description:
-      "Compare planos individuais, familiares e empresariais com orientação clara em Brasília e no Distrito Federal.",
+      "Compare planos individuais, familiares e empresariais em Brasília e no DF. Solicite sua cotação personalizada pelo WhatsApp.",
     url: SITE_URL,
     type: "website",
     locale: "pt_BR",
@@ -67,7 +71,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Plano de Saúde em Brasília e DF | Multicorretora",
     description:
-      "Compare planos de saúde em Brasília e encontre uma opção alinhada ao seu perfil.",
+      "Compare planos de saúde em Brasília e receba uma cotação alinhada ao seu perfil.",
     images: ["/og.png"],
   },
   robots: {

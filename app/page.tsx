@@ -1,9 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { AccessibilityControls } from "./components/AccessibilityControls";
 import { LocalSalesAgent } from "./components/LocalSalesAgent";
-import { SITE_URL } from "./site-config";
+import { SITE_URL, WHATSAPP_URL } from "./site-config";
 import {
   ArrowRight,
   BadgeCheck,
@@ -24,9 +25,6 @@ import {
   Users,
   WalletCards,
 } from "lucide-react";
-
-const WHATSAPP_URL =
-  "https://wa.me/556184843238?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Multicorretora%20e%20quero%20comparar%20planos%20para%20encontrar%20a%20melhor%20op%C3%A7%C3%A3o%20para%20mim.";
 
 const operators = [
   {
@@ -91,18 +89,21 @@ const services = [
     title: "Plano de saúde individual e familiar",
     text: "Compare redes, coberturas e valores de planos de saúde em Brasília para proteger quem você ama.",
     tag: "Para quem você ama",
+    href: "/plano-de-saude-familiar-brasilia",
   },
   {
     icon: BriefcaseBusiness,
     title: "Plano de saúde empresarial",
     text: "Encontre um benefício competitivo no Distrito Federal para cuidar da equipe e valorizar sua empresa.",
     tag: "Soluções empresariais",
+    href: "/plano-de-saude-empresarial-brasilia",
   },
   {
     icon: Stethoscope,
     title: "Plano de saúde por adesão",
     text: "Descubra alternativas disponíveis para sua categoria profissional e amplie suas possibilidades.",
     tag: "Compare possibilidades",
+    href: "/plano-de-saude-individual-brasilia",
   },
   {
     icon: ShieldCheck,
@@ -176,34 +177,6 @@ const faqs = [
 ];
 
 export default function Home() {
-  const [fontScale, setFontScale] = useState(1);
-  const [highContrast, setHighContrast] = useState(false);
-  const [accessibilityReady, setAccessibilityReady] = useState(false);
-
-  useEffect(() => {
-    const loadSavedPreferences = window.setTimeout(() => {
-      const savedScale = Number(localStorage.getItem("multicorretora-font-scale"));
-      const savedContrast = localStorage.getItem("multicorretora-high-contrast");
-
-      if ([1, 1.125, 1.25].includes(savedScale)) {
-        setFontScale(savedScale);
-      }
-      setHighContrast(savedContrast === "true");
-      setAccessibilityReady(true);
-    }, 0);
-
-    return () => window.clearTimeout(loadSavedPreferences);
-  }, []);
-
-  useEffect(() => {
-    if (!accessibilityReady) return;
-
-    document.documentElement.style.fontSize = `${fontScale * 100}%`;
-    document.documentElement.toggleAttribute("data-high-contrast", highContrast);
-    localStorage.setItem("multicorretora-font-scale", String(fontScale));
-    localStorage.setItem("multicorretora-high-contrast", String(highContrast));
-  }, [accessibilityReady, fontScale, highContrast]);
-
   useEffect(() => {
     const targets = document.querySelectorAll<HTMLElement>("[data-reveal]");
     const observer = new IntersectionObserver(
@@ -226,9 +199,11 @@ export default function Home() {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "InsuranceAgency",
+        "@type": ["Organization", "InsuranceAgency"],
         "@id": `${SITE_URL}/#organization`,
         name: "Multicorretora Planos de Saúde e Seguros",
+        alternateName: "Multicorretora",
+        legalName: "Multicorretora Planos de Saúde e Seguros",
         url: SITE_URL,
         logo: `${SITE_URL}/logo-multicorretora-menu.jpeg`,
         image: `${SITE_URL}/og.png`,
@@ -236,6 +211,11 @@ export default function Home() {
           "Corretora de planos de saúde e seguros para pessoas, famílias e empresas em Brasília e no Distrito Federal.",
         telephone: "+55 61 8484-3238",
         taxID: "19.607.678/0001-65",
+        identifier: {
+          "@type": "PropertyValue",
+          propertyID: "CNPJ",
+          value: "19.607.678/0001-65",
+        },
         areaServed: [
           {
             "@type": "City",
@@ -262,12 +242,43 @@ export default function Home() {
           areaServed: "BR",
           availableLanguage: "Portuguese",
         },
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: "Planos de saúde e seguros",
+          itemListElement: [
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Plano de saúde familiar em Brasília",
+                url: `${SITE_URL}/plano-de-saude-familiar-brasilia`,
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Plano de saúde individual em Brasília",
+                url: `${SITE_URL}/plano-de-saude-individual-brasilia`,
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Plano de saúde empresarial em Brasília",
+                url: `${SITE_URL}/plano-de-saude-empresarial-brasilia`,
+              },
+            },
+          ],
+        },
       },
       {
         "@type": "WebSite",
         "@id": `${SITE_URL}/#website`,
         url: SITE_URL,
         name: "Multicorretora",
+        alternateName: "Multicorretora Planos de Saúde e Seguros",
         inLanguage: "pt-BR",
         publisher: {
           "@id": `${SITE_URL}/#organization`,
@@ -287,6 +298,18 @@ export default function Home() {
         about: {
           "@id": `${SITE_URL}/#organization`,
         },
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${SITE_URL}/#faq`,
+        mainEntity: faqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: faq.answer,
+          },
+        })),
       },
     ],
   };
@@ -310,42 +333,8 @@ export default function Home() {
             <ShieldCheck size={15} aria-hidden="true" />
             Consultoria em saúde e proteção
           </span>
-          <div
-            className="accessibility-controls"
-            role="group"
-            aria-label="Controles de acessibilidade"
-          >
-            <strong>Acessibilidade</strong>
-            <button
-              type="button"
-              onClick={() => setFontScale((size) => Math.max(1, size - 0.125))}
-              disabled={fontScale === 1}
-              aria-label="Diminuir tamanho do texto"
-            >
-              A−
-            </button>
-            <button
-              type="button"
-              onClick={() => setFontScale((size) => Math.min(1.25, size + 0.125))}
-              disabled={fontScale === 1.25}
-              aria-label="Aumentar tamanho do texto"
-            >
-              A+
-            </button>
-            <button
-              type="button"
-              className="contrast-control"
-              onClick={() => setHighContrast((active) => !active)}
-              aria-pressed={highContrast}
-            >
-              Alto contraste
-            </button>
-          </div>
+          <AccessibilityControls />
           <span className="company-document">CNPJ 19.607.678/0001-65</span>
-          <span className="sr-only" aria-live="polite" aria-atomic="true">
-            Texto em {Math.round(fontScale * 100)} por cento.
-            {highContrast ? " Alto contraste ativado." : " Alto contraste desativado."}
-          </span>
         </div>
       </div>
 
@@ -592,8 +581,12 @@ export default function Home() {
                   <span className="service-tag">{service.tag}</span>
                   <h3>{service.title}</h3>
                   <p>{service.text}</p>
-                  <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">
-                    Ver opções para mim
+                  <a
+                    href={service.href ?? WHATSAPP_URL}
+                    target={service.href ? undefined : "_blank"}
+                    rel={service.href ? undefined : "noreferrer"}
+                  >
+                    {service.href ? "Ver guia e opções" : "Ver opções para mim"}
                     <ArrowRight size={17} aria-hidden="true" />
                   </a>
                 </article>
